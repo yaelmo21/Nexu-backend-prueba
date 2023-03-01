@@ -51,3 +51,7 @@ De forma inmediata se puede obtener toda la documentación en la ruta '/docs/jso
 **Solo disponible en ambiente de desarrollo**
 
 Realiza una petición **POST** a la ruta '/database', esto removera toda la data actual y insertará los datos de prueba contenido en /database/models.json
+
+## Url Prod
+
+[nexu-backend-prueba-production.up.railway.app](nexu-backend-prueba-production.up.railway.app).
