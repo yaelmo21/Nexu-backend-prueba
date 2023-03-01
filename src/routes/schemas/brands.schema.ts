@@ -15,11 +15,12 @@ export namespace BrandsSchema {
                         items: {
                             type: 'object',
                             properties: {
-                                id: { type: 'number' },
                                 name: { type: 'string' },
                                 average_price: { type: 'number' },
                                 brand_name: { type: 'string' },
-                                '_id': { type: 'string' }
+                                _id: { type: 'string' },
+                                createdAt: { type: 'string' },
+                                updatedAt: { type: 'string' }
                             }
                         }
                     }
@@ -47,10 +48,11 @@ export namespace BrandsSchema {
                         items: {
                             type: 'object',
                             properties: {
-                                id: { type: 'number' },
                                 name: { type: 'string' },
                                 average_price: { type: 'number' },
-                                '_id': { type: 'string' }
+                                _id: { type: 'string' },
+                                createdAt: { type: 'string' },
+                                updatedAt: { type: 'string' }
                             }
                         }
                     }
@@ -73,10 +75,16 @@ export namespace BrandsSchema {
             201: {
                 type: 'object',
                 properties: {
-                    id: { type: 'number' },
-                    name: { type: 'string' },
-                    average_price: { type: 'number' },
-                    '_id': { type: 'string' }
+                    ok: { type: 'boolean' },
+                    brand: {
+                        type: 'object',
+                        properties: {
+                            name: { type: 'string' },
+                            _id: { type: 'string' },
+                            createdAt: { type: 'string' },
+                            updatedAt: { type: 'string' }
+                        }
+                    }
                 }
             }
         }

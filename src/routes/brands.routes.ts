@@ -20,7 +20,6 @@ const BrandsRoutes: FastifyPluginAsync = async (server) => {
     }, async (request, reply) => {
         const { id } = request.params;
         const models = await getModelsByBrandId(id);
-        console.log('hola')
         if (models.length === 0) {
             throw new NotFoundError(`No models found for this brand ${id}`);
         }
@@ -35,7 +34,7 @@ const BrandsRoutes: FastifyPluginAsync = async (server) => {
     }, async (request, reply) => {
         const { name } = request.body;
         const brand = await createBrand(name);
-        reply.status(200).send({
+        reply.status(201).send({
             ok: true,
             brand
         });
