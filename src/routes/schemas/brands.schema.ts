@@ -88,6 +88,42 @@ export namespace BrandsSchema {
                 }
             }
         }
+    }
 
+    export const createModel: FastifySchema = {
+        description: 'Endpoint to create a model by brand name or id',
+        tags: [tag],
+        params: {
+            type: 'object',
+            properties: {
+                id: { type: 'string' }
+            },
+        },
+        body: {
+            type: 'object',
+            properties: {
+                name: { type: 'string' },
+                average_price: { type: 'number', minimum: 100001 },
+            },
+            required: ['name']
+        },
+        response: {
+            201: {
+                type: 'object',
+                properties: {
+                    ok: { type: 'boolean' },
+                    model: {
+                        type: 'object',
+                        properties: {
+                            name: { type: 'string' },
+                            average_price: { type: 'number' },
+                            _id: { type: 'string' },
+                            createdAt: { type: 'string' },
+                            updatedAt: { type: 'string' }
+                        }
+                    }
+                }
+            },
+        }
     }
 }

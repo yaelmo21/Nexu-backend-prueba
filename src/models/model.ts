@@ -6,7 +6,7 @@ export interface IModel extends ModelInterface { };
 
 const modelSchema = new Schema({
     name: { type: String, required: true },
-    average_price: { type: Number, required: true },
+    average_price: { type: Number, default: 0 },
     brand: { type: Schema.Types.ObjectId, ref: 'Brand', required: true },
 }, {
     timestamps: true,

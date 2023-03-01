@@ -1,7 +1,9 @@
 import { FastifyPluginAsync } from 'fastify';
-import { NotFoundError } from 'http-errors-enhanced';
-import { createBrand, getAllBrands, getModelsByBrandId } from '../usecases/brands';
+import { NotFoundError, ConflictError } from 'http-errors-enhanced';
+import { createBrand, getAllBrands, getModelsByBrandId, isBranInDb } from '../usecases/brands';
 import { BrandsSchema } from './schemas';
+import { createModel, isModelInDb } from '../usecases/models';
+
 
 
 const BrandsRoutes: FastifyPluginAsync = async (server) => {
@@ -37,6 +39,23 @@ const BrandsRoutes: FastifyPluginAsync = async (server) => {
         reply.status(201).send({
             ok: true,
             brand
+        });
+    });
+
+    server.post<{ Params: { id: string }, Body: { name: string, average_price?: number } }>('/:id/models', {
+        schema: BrandsSchema.createModel
+    }, async (request, reply) => {
+        const { id } = request.params;
+        const { name, average_price } = request.body;
+        const brandDb = await isBranInDb(id);
+        if (!brandDb) throw new NotFoundError(`No brand found with this id ${id}`);
+        const brandId = brandDb._id.toString();
+        const modelInDb = await isModelInDb(name, brandId);
+        if (modelInDb) throw new ConflictError(`Model ${name} already exists in this brand`);
+        const model = await createModel(brandId, name, average_price);
+        reply.status(201).send({
+            ok: true,
+            model
         });
     });
 }
