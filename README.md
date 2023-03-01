@@ -27,7 +27,7 @@ La variable **HOST_DOMAIN** es el dominio asociado al servidor con el cual podr√
 
 ```
 MONGO_URL=mongodb://localhost:27017/brands_db
-HOST_DOMAIN=
+HOST_DOMAIN=www.example.com
 ```
 
 ## Documentaci√≥n de Api
