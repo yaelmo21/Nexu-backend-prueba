@@ -54,4 +54,4 @@ Realiza una petición **POST** a la ruta '/database', esto removera toda la data
 
 ## Url Prod
 
-[nexu-backend-prueba-production.up.railway.app](nexu-backend-prueba-production.up.railway.app).
+[nexu-backend-prueba-production.up.railway.app](https://nexu-backend-prueba-production.up.railway.app)
