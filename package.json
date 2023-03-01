@@ -8,7 +8,9 @@
     "dev": "nodemon",
     "build": "tsc -p tsconfig.json",
     "start": "node --experimental-specifier-resolution=node dist/index.js",
-    "test": "jest",
+    "test": "node --no-warnings --experimental-vm-modules -r dotenv/config  node_modules/jest/bin/jest.js",
+    "test:watch": "yarn test --watch ",
+    "test:coverage": "yarn test --coverage",
     "postinstall": "yarn build"
   },
   "main": "index.js",
