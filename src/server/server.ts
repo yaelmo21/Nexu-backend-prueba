@@ -20,7 +20,7 @@ export default class Server {
     private init() {
         const server = fastify();
         server.register(fastifyFormbody);
-        server.register(fastifyHttpErrorsEnhanced);
+        server.register(fastifyHttpErrorsEnhanced, { allowUndeclaredResponses: true });
         server.register(fastifyHelmet, {
             crossOriginResourcePolicy: false,
         });

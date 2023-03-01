@@ -1,5 +1,5 @@
 import { FastifySchema } from 'fastify';
-import { TagBrands, errorResponses } from '../../swagger';
+import { TagBrands } from '../../swagger';
 export namespace BrandsSchema {
     const tag = TagBrands.name;
     export const getAllBrandsSchema: FastifySchema = {
@@ -25,13 +25,18 @@ export namespace BrandsSchema {
                     }
                 }
             },
-            ...errorResponses
         }
     }
 
     export const getModelsByBrand: FastifySchema = {
         description: 'Endpoint to get all models by brand name or id',
         tags: [tag],
+        params: {
+            type: 'object',
+            properties: {
+                id: { type: 'string' }
+            },
+        },
         response: {
             200: {
                 type: 'object',
@@ -51,7 +56,6 @@ export namespace BrandsSchema {
                     }
                 }
             },
-            ...errorResponses
         }
     }
 

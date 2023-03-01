@@ -1,5 +1,4 @@
 import { FastifySchema } from 'fastify';
-import { errorResponses } from '../../swagger';
 
 export namespace RootSchemas {
     export const rootSchema: FastifySchema = {
@@ -12,7 +11,6 @@ export namespace RootSchemas {
                     }
                 }
             },
-            ...errorResponses
         }
     }
 }

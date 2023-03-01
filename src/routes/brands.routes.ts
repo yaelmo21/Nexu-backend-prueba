@@ -20,6 +20,7 @@ const BrandsRoutes: FastifyPluginAsync = async (server) => {
     }, async (request, reply) => {
         const { id } = request.params;
         const models = await getModelsByBrandId(id);
+        console.log('hola')
         if (models.length === 0) {
             throw new NotFoundError(`No models found for this brand ${id}`);
         }

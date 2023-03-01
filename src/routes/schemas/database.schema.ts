@@ -1,5 +1,5 @@
 import { FastifySchema } from 'fastify';
-import { TagDatabase, errorResponses } from '../../swagger';
+import { TagDatabase } from '../../swagger';
 
 export namespace DatabaseSchema {
     const tag = TagDatabase.name;
@@ -38,7 +38,6 @@ export namespace DatabaseSchema {
                     }
                 }
             },
-            ...errorResponses
         }
     }
 }
