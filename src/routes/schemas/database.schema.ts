@@ -1,5 +1,5 @@
 import { FastifySchema } from 'fastify';
-import { TagDatabase } from '../../swagger';
+import { TagDatabase, errorResponses } from '../../swagger';
 
 export namespace DatabaseSchema {
     const tag = TagDatabase.name;
@@ -11,21 +11,34 @@ export namespace DatabaseSchema {
                 type: 'object',
                 properties: {
                     ok: { type: 'boolean' },
-                    brands: {
+                    data: {
                         type: 'array',
                         items: {
                             type: 'object',
                             properties: {
-                                id: { type: 'number' },
                                 name: { type: 'string' },
-                                average_price: { type: 'number' },
-                                brand_name: { type: 'string' },
-                                '_id': { type: 'string' }
+                                _id: { type: 'string' },
+                                createdAt: { type: 'string' },
+                                updatedAt: { type: 'string' },
+                                models: {
+                                    type: 'array',
+                                    items: {
+                                        type: 'object',
+                                        properties: {
+                                            _id: { type: 'string' },
+                                            name: { type: 'string' },
+                                            average_price: { type: 'number' },
+                                            createdAt: { type: 'string' },
+                                            updatedAt: { type: 'string' }
+                                        }
+                                    }
+                                }
                             }
                         }
                     }
                 }
-            }
+            },
+            ...errorResponses
         }
     }
 }

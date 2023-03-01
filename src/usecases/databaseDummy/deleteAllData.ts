@@ -1,3 +1,6 @@
-import { Brand } from '../../models';
+import { Brand, Model } from '../../models';
 
-export const deleteAllData = () => Brand.deleteMany({});
+export const deleteAllData = async () => {
+    await Model.deleteMany({});
+    await Brand.deleteMany({});
+}

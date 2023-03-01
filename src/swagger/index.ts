@@ -1,1 +1,2 @@
-export * from './tags'
+export * from './tags';
+export * from './errorResponses';

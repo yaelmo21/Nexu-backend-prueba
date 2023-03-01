@@ -1,10 +1,10 @@
 import fastify, { FastifyInstance } from 'fastify';
 import fastifyFormbody from '@fastify/formbody';
-import fastifyCors from "@fastify/cors";
-import fastifyHelmet from "@fastify/helmet";
-import fastifySwagger from "@fastify/swagger";
-import fastifySwaggerUi from '@fastify/swagger-ui'
-import fastifyHttpErrorsEnhanced from 'fastify-http-errors-enhanced'
+import fastifyCors from '@fastify/cors';
+import fastifyHelmet from '@fastify/helmet';
+import fastifySwagger from '@fastify/swagger';
+import fastifySwaggerUi from '@fastify/swagger-ui';
+import fastifyHttpErrorsEnhanced from 'fastify-http-errors-enhanced';
 import { HOST, HOST_DOMAIN, NODE_ENV, PORT, VERSION } from '../environment';
 import routes from '../routes';
 import { tags } from '../swagger';
@@ -45,9 +45,13 @@ export default class Server {
         });
         server.register(fastifySwaggerUi, {
             routePrefix: '/docs',
-
         });
         server.register(routes);
+
+        server.addHook('preSerialization', (request, reply, payload, done) => {
+            const body = JSON.parse(JSON.stringify(payload));
+            done(null, body);
+        });
         return server;
     }
 
