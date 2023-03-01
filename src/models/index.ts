@@ -1,0 +1,1 @@
+export { default as Brand, type IBrand } from './brand';

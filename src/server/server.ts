@@ -1,5 +1,13 @@
 import fastify, { FastifyInstance } from 'fastify';
-import { HOST, PORT } from '../environment';
+import fastifyFormbody from '@fastify/formbody';
+import fastifyCors from "@fastify/cors";
+import fastifyHelmet from "@fastify/helmet";
+import fastifySwagger from "@fastify/swagger";
+import fastifySwaggerUi from '@fastify/swagger-ui'
+import fastifyHttpErrorsEnhanced from 'fastify-http-errors-enhanced'
+import { HOST, NODE_ENV, PORT, VERSION } from '../environment';
+import routes from '../routes';
+import { tags } from '../swagger';
 
 export default class Server {
     private static _instance: Server;
@@ -11,6 +19,34 @@ export default class Server {
 
     private init() {
         const server = fastify();
+        server.register(fastifyFormbody);
+        server.register(fastifyHttpErrorsEnhanced);
+        server.register(fastifyHelmet, {
+            crossOriginResourcePolicy: false,
+        });
+        server.register(fastifyCors);
+        server.register(fastifySwagger, {
+            swagger: {
+                info: {
+                    title: 'Nexu API',
+                    description: 'Nexu API models and brands cars',
+                    version: VERSION
+                },
+                externalDocs: {
+                    url: 'https://swagger.io',
+                    description: 'Find more info here'
+                },
+                host: HOST,
+                schemes: NODE_ENV === 'development' ? ['http'] : ['https'],
+                basePath: '/',
+                consumes: ['application/json'],
+                tags: tags
+            }
+        });
+        server.register(fastifySwaggerUi, {
+            routePrefix: `${HOST}/docs`,
+        });
+        server.register(routes);
         return server;
     }
 
