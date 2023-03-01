@@ -5,7 +5,7 @@ import { createBrand } from '../../../usecases/brands';
 describe('Test in createBrand', () => {
     test('create a brand', async () => {
         await connectDb();
-        const name = 'test';
+        const name = 'test-' + new Date().getTime().toString();
         const brand = await createBrand(name);
         expect(brand.name).toBe(name);
         await Brand.findByIdAndDelete(brand._id);
@@ -13,7 +13,7 @@ describe('Test in createBrand', () => {
     });
 
     test('create a brand with same name', async () => {
-        const name = 'test';
+        const name = 'test-' + new Date().getTime().toString();
         await connectDb();
         const brandOne = await createBrand(name);
         const brandTwo = createBrand(name);
