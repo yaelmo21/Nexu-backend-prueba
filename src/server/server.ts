@@ -5,7 +5,7 @@ import fastifyHelmet from "@fastify/helmet";
 import fastifySwagger from "@fastify/swagger";
 import fastifySwaggerUi from '@fastify/swagger-ui'
 import fastifyHttpErrorsEnhanced from 'fastify-http-errors-enhanced'
-import { HOST, NODE_ENV, PORT, VERSION } from '../environment';
+import { HOST, HOST_DOMAIN, NODE_ENV, PORT, VERSION } from '../environment';
 import routes from '../routes';
 import { tags } from '../swagger';
 
@@ -36,7 +36,7 @@ export default class Server {
                     url: 'https://swagger.io',
                     description: 'Find more info here'
                 },
-                host: HOST,
+                host: HOST_DOMAIN,
                 schemes: NODE_ENV === 'development' ? ['http'] : ['https'],
                 basePath: '/',
                 consumes: ['application/json'],
@@ -44,7 +44,8 @@ export default class Server {
             }
         });
         server.register(fastifySwaggerUi, {
-            routePrefix: `${HOST}/docs`,
+            routePrefix: '/docs',
+
         });
         server.register(routes);
         return server;

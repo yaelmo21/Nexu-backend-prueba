@@ -5,5 +5,8 @@ export const createData = async () => {
     await deleteAllData();
     const brands = DatabaseDummyController.getAllData();
     const brandsDb = await Brand.insertMany(brands);
-    return brandsDb;
+    return brandsDb.map((brand) => ({
+        ...brand.toJSON(),
+        _id: brand._id.toString()
+    }));
 }
