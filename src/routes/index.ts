@@ -6,4 +6,7 @@ import DatabaseRoutes from './database.routes';
 export default fb(async (server) => {
     server.register(BrandsRoutes, { prefix: '/brands' });
     server.register(DatabaseRoutes, { prefix: '/database' });
+    server.get('/', async (req, reply) => {
+        reply.send({ message: 'Welcome to the API' });
+    });
 }, { name: 'Api Routes' });
